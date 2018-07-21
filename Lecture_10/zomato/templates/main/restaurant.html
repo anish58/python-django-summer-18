@@ -2,12 +2,9 @@
 
 {% block body %}
 
-    Name: {{ restaurant.name }}<br>
-    Address: {{ restaurant.address }}<br>
-    Open Time: {{ restaurant.open_time }}<br>
-    Close Time: {{ restaurant.close_time }}<br>
-
-    Average Rating: {{ restaurant.get_rating }}
+    {% for f,v in restaurant.get_data.items %}
+        {{ f }}: {{v}} <br>
+    {% endfor %}
 
     <h2> Reviews </h2>
 
@@ -15,14 +12,18 @@
 
         {% for review in restaurant.review_set.all %}
 
-            <li> <a target="_blank" href="{% url 'review' id=review.pk %}"> {{ review.title }} - {{ review.get_stars }} </a> </li>
+            <li> <a onclick="window.open('{% url 'review' id=review.pk %}', 
+                '', 
+                'width=300,height=250'); 
+                return false;"
+                href="{% url 'review' id=review.pk %}"> {{ review.title }} - {{ review.get_stars }} </a> </li>
 
         {% endfor %}
 
     </ul>
 
     {% if success %}
-        <p> Review Added </p>
+        <p> Restaurant review Added </p>
     {% endif %}
 
     <h2> Add Review </h2>
