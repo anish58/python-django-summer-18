@@ -28,6 +28,9 @@ class Review(models.Model):
 		MaxValueValidator(5),
 		MinValueValidator(0)
 	])
+	
+	def get_stars(self):
+		return "* "*self.rating
+
 	def __str__(self):
 		return self.title
-
