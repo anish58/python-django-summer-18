@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from . import models
 from django.db.models import Avg
 from . import forms
+from django.views.generic import FormMixn
 
 
 def index(request):
